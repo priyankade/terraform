@@ -42,9 +42,15 @@ module "alb" {
   vpc_id                        = module.vpc.vpc_id  
 }
 
+#create iam role
+module "iam" {
+  source                        = "../modules/iam"
+  project_name                  = var.project_name
+}
+
 #create auto scaling group
 module "auto-scaling-group" {
-  source = "../modules/asg"
+  source                        = "../modules/asg"
   availability_zones            = var.availability_zones
   asg_security_group_id         = module.security-group.asg_security_group_id
   project_name                  = var.project_name
@@ -54,4 +60,5 @@ module "auto-scaling-group" {
   alb_target_group_arn          = module.alb.alb_target_group_arn
   private_app_subnet_az1_id     = module.vpc.private_app_subnet_az1_id
   private_app_subnet_az2_id     = module.vpc.private_app_subnet_az2_id
+  ec2-iam-profile               = module.iam.ec2-iam-profile
 }
