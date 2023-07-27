@@ -7,6 +7,7 @@ variable "user_data" {}
 variable "alb_target_group_arn" {}
 variable "private_app_subnet_az1_id" {}
 variable "private_app_subnet_az2_id" {}
-#variable "vpc_security_group_ids" {}
+variable "ec2-iam-profile" {}
+
 
 

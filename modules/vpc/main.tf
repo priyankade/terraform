@@ -18,9 +18,6 @@ resource "aws_internet_gateway" "internet_gateway" {
   }
 }
 
-# use data source to get list of all avalablility zones in region
-data "aws_availability_zones" "available_zones" {}
-
 # create public subnet az1
 resource "aws_subnet" "public_subnet_az1" {
   vpc_id                  = aws_vpc.vpc.id

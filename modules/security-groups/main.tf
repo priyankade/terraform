@@ -1,5 +1,5 @@
 resource "aws_security_group" "alb_security_group" {
-  name        = "my-sg"
+  name        = "alb-sg"
   description = "Allow http/https acess on port 80/443"
   vpc_id      =  var.vpc_id
 
@@ -51,6 +51,14 @@ resource "aws_security_group" "asg_security_group" {
     to_port          = "443"
     protocol         = "tcp"
     security_groups  = [aws_security_group.alb_security_group.id]
+  }
+
+  ingress {
+    description      = "https access"
+    from_port        = 22
+    to_port          = 22
+    protocol         = "tcp"
+    cidr_blocks      = ["0.0.0.0/0"]
   }
 
   egress {
